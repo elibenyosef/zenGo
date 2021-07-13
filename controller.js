@@ -2,6 +2,30 @@ import axios from 'axios'
 import config from './config.js'
 
 /**
+ * Welcome page 
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} next 
+ * @returns 
+ */
+const welcomePage =  (req, res, next) => {
+    return res.send(
+        `<!DOCTYPE html>
+        <html>
+        <head>
+        <title>Page Title</title>
+        </head>
+        <body>
+        <h1>Welcome to ZenGo app!</h1>
+        <h2>Try this route for example:</h2>
+        <p>${config.awsPublicAddress}/coinsDiff?coinType=BTC,ETH,BNB,DOGE&date=01/01/2020</p>
+        </body>
+        </html>`
+    )
+}
+
+
+/**
  * Calculate the precentage difference between coins prices - from given past date and current date
  * @param {*} req
  * @param {*} res
@@ -9,14 +33,6 @@ import config from './config.js'
  * @returns String
  */
 const getCoinsPriceDiff = async (req, res, next) => {
-//   if (!req.query.coinType) {
-//     return res.status(422).send('Please choose at least one coin, it is mandatory')
-//   }
-//   if (!req.query.date) {
-//     return res.status(422).send('Please choose past date, it is mandatory')
-//   }
-//   const date = req.query.date ? moment(req.query.date, 'DD/MM/YYYY').toDate() : moment().toDate()
-
   // Fetch all coins data
   const coinsUrl = await urlBuilder(req.query.coinType, req.query.date)
   // Extract the relevant data
@@ -118,4 +134,4 @@ const updateCoinsList = async (req, res, next) => {
   res.send(ans)
 }
 
-export { getCoinsPriceDiff, updateCoinsList }
+export { welcomePage, getCoinsPriceDiff, updateCoinsList }

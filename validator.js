@@ -31,8 +31,13 @@ const getCoinsPriceDiffSchema = {
   date: {
     in: ['query'],
     notEmpty: true,
-    // isDate: true,
-    isBefore: new Date(),
+    custom: {
+        options: (queryDate) => {
+          let isCorrectLength = queryDate.length === 10
+          let date = moment(queryDate, 'DD/MM/YYYY')
+          return isCorrectLength && date.isValid() && date.isBefore(moment())
+        }
+      },
     errorMessage: 'date param is wrong or empty',
     customSanitizer: {
       options: (value, { req, location, path }) => {

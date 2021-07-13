@@ -1,5 +1,6 @@
 export default
 {
+    "awsPublicAddress": "http://ec2-54-149-142-17.us-west-2.compute.amazonaws.com:8000",
     "baseUrl": "https://min-api.cryptocompare.com/data/",
     "apiKey": "92b36bfbcad396468cc7f9eeab22aa0256faafeb68f3ecd1ef1be01ec0de4f4f",
     "approvedCoins":[
