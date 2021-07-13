@@ -33,17 +33,20 @@ const welcomePage =  (req, res, next) => {
  * @returns String
  */
 const getCoinsPriceDiff = async (req, res, next) => {
-  // Fetch all coins data
+  // Build all relevant url path
   const coinsUrl = await urlBuilder(req.query.coinType, req.query.date)
-  // Extract the relevant data
+  // Fetch all data
   const coinsData = await Promise.all(coinsUrl)
-  // build the answer
+  // Extract data and build the final answer
   const ans = dataBuilder(coinsData)
 
   return res.send(ans)
 }
 /**
- *
+ * Build url for fetching coins date
+ * There are two types of urls:
+ *  1. Past prices - every coin has its own url
+ *  2. Current Prices - single url that contains all coins
  * @param {[String]} coinsArray
  * @param {Date} date
  * @returns Array that contains urls
@@ -127,11 +130,19 @@ const extractDataFromCoin = (coinsRawDataArray, i) => {
   return { key, previousValue, currentValue }
 }
 
+/**
+ * Fetch all approved coins and returns them in array
+ * --------- This method can be modified on production to update
+ * --------- the approved coins list (and can be trrigered via cron)
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} next 
+ */
 const updateCoinsList = async (req, res, next) => {
   let coinsList = await axios.get(`${config.baseUrl}all/coinlist?api_key=${config.apiKey}`)
   coinsList = coinsList.data.Data
   const ans = Object.keys(coinsList).map(key => { return key })
-  res.send(ans)
+  return res.send(ans)
 }
 
 export { welcomePage, getCoinsPriceDiff, updateCoinsList }

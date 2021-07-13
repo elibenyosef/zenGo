@@ -9,7 +9,7 @@ app.use(express.urlencoded({ extended: false }))
 app.use('/', router)
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}!`)
+  console.log(`ZenGo app listening on port ${port}!`)
 })
 
 // module.exports = app;

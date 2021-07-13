@@ -7,7 +7,7 @@ const router = express.Router()
 router.get('/', welcomePage)
 // Get coins price change
 router.get('/coinsDiff', validate(checkSchema(getCoinsPriceDiffSchema)), getCoinsPriceDiff)
-
+// Get approved coins list
 router.get('/updateCoinsList', updateCoinsList)
 
 // module.exports = router;
