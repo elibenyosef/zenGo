@@ -17,8 +17,5 @@ Make sure NodeJS is installed and run the command:
 node index.js
 ```
 
-## Assumptions
-Input is an Integer
-
 ## License
 Eli Ben-Yosef
